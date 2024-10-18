@@ -1,0 +1,393 @@
+//Q.1 Producer Consumer Problem
+class SharedMemory {
+    private int contents;       // Shared resource (buffer)
+    private boolean available = false;  // Indicates if data is available
+
+    // Consumer retrieves an item
+    public synchronized int get() {
+        while (!available) {
+            try {
+                wait();  // Wait if no data is available
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        available = false;  // Mark the buffer as empty
+        notifyAll();  // Notify waiting threads
+        return contents;
+    }
+
+    // Producer stores an item
+    public synchronized void put(int value) {
+        while (available) {
+            try {
+                wait();  // Wait if buffer is full
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        contents = value;  // Store the value in the buffer
+        available = true;  // Mark the buffer as full
+        notifyAll();  // Notify waiting threads
+    }
+}
+
+// Producer thread
+class Producer extends Thread {
+    private final SharedMemory shared;
+    private final int producerNumber;
+
+    public Producer(SharedMemory shared, int number) {
+        this.shared = shared;
+        this.producerNumber = number;
+    }
+
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            shared.put(i);  // Store value in the shared buffer
+            System.out.println("Producer" + producerNumber + "put" + i);
+            try {
+                Thread.sleep((int) (Math.random() * 100));  // Simulate work
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+// Consumer thread
+class Consumer extends Thread {
+    private final SharedMemory shared;
+    private final int consumerNumber;
+
+    public Consumer(SharedMemory shared, int number) {
+        this.shared = shared;
+        this.consumerNumber = number;
+    }
+
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            int value = shared.get();  // Retrieve value from the buffer
+            System.out.println("Consumer#" + consumerNumber + "got" + value);
+            try {
+                Thread.sleep((int) (Math.random() * 100));  // Simulate work
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+// Main class to start the threads
+public class ProducerConsumer {
+    public static void main(String[] args) {
+        SharedMemory shared = new SharedMemory();  // Shared buffer
+
+        Producer producer = new Producer(shared, 1);  // Producer 1
+        Consumer consumer = new Consumer(shared, 1);  // Consumer 1
+
+        producer.start();  // Start producer thread
+        consumer.start();  // Start consumer thread
+
+        try {
+            producer.join();  // Wait for producer to finish
+            consumer.join();  // Wait for consumer to finish
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+//Q.2 Summation of Non-Negative Integer from 0 to n.
+
+class SumTask extends Thread {
+    private int number;
+    private int sum;
+    
+    public SumTask(int number) {
+        this.number = number;
+    }
+    
+    @Override
+    public void run() {
+        sum = calculateSum(number);
+    }
+    
+    private int calculateSum(int n) {
+        int total = 0;
+        for(int i = 1; i <= n; i++) {
+            total += i;
+        }
+        return total;
+    }
+    
+    public int getSum() {
+        return sum;
+    }
+}
+ public class Main {
+     public static void main(String args[]) {
+         int number = 10;
+         
+         if (number < 0) {
+             System.out.println("Please enter a non negative integer.")
+         }
+         
+         SumTask st = new SumTask(number);
+         st.start();
+         
+         try {
+             st.join();
+         }
+         catch (InterruptedException e) {
+             System.out.println("Thread was interrupted.");
+         }
+         
+         System.out.println("Sum from 0 to "+number+" is "+st.getSum());
+     }
+ }
+
+
+//Q.3 and Q.4 Fibonacci Series
+import java.util.Scanner;
+
+class FibonacciThread extends Thread {
+    private final int n;
+
+    public FibonacciThread(int n) {
+        this.n = n;
+    }
+
+    @Override
+    public void run() {
+        if (n <= 0) {
+            System.out.println("No Fibonacci numbers to display.");
+            return;
+        }
+
+        System.out.print("Fibonacci Sequence: ");
+        long a = 0, b = 1;
+        System.out.print(a);
+        if (n > 1) System.out.print(" " + b);
+
+        for (int i = 2; i < n; i++) {
+            long next = a + b;
+            System.out.print(" " + next);
+            a = b;
+            b = next;
+        }
+        System.out.println();
+    }
+}
+
+public class MultithreadedFibonacci {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of Fibonacci terms: ");
+        int n = scanner.nextInt();
+
+        FibonacciThread fibonacciThread = new FibonacciThread(n);
+        fibonacciThread.start();  // Start the thread
+
+        try {
+            fibonacciThread.join();  // Wait for the thread to finish
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+//Q.5 SJF Algorithm
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Process {
+    String id;       // Process ID (P1, P2, ...)
+    int burstTime;   // Burst Time
+    int waitingTime; // Waiting Time
+    int turnaroundTime; // Turnaround Time
+
+    Process(String id, int burstTime) {
+        this.id = id;
+        this.burstTime = burstTime;
+    }
+}
+
+public class SJFScheduling {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter number of process: ");
+        int n = scanner.nextInt();
+        Process[] processes = new Process[n];
+
+        // Input burst times for each process
+        System.out.println("Enter Burst Time:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("P" + (i + 1) + ": ");
+            int burstTime = scanner.nextInt();
+            processes[i] = new Process("P" + (i + 1), burstTime);
+        }
+
+        // Sort processes by burst time (Shortest Job First)
+        Arrays.sort(processes, (a, b) -> a.burstTime - b.burstTime);
+
+        // Calculate Waiting Time and Turnaround Time for each process
+        int totalWaitingTime = 0, totalTurnaroundTime = 0;
+        processes[0].waitingTime = 0; // First process has 0 waiting time
+        processes[0].turnaroundTime = processes[0].burstTime;
+
+        for (int i = 1; i < n; i++) {
+            processes[i].waitingTime = processes[i - 1].waitingTime + processes[i - 1].burstTime;
+            processes[i].turnaroundTime = processes[i].waitingTime + processes[i].burstTime;
+
+            totalWaitingTime += processes[i].waitingTime;
+            totalTurnaroundTime += processes[i].turnaroundTime;
+        }
+        totalTurnaroundTime += processes[0].turnaroundTime; // Include first process's TAT
+
+        // Display Table Header
+        System.out.println("\nP\tBT\tWT\tTAT");
+        for (Process p : processes) {
+            System.out.println(p.id + "\t" + p.burstTime + "\t" + p.waitingTime + "\t" + p.turnaroundTime);
+        }
+
+        // Calculate and print Average Waiting Time and Turnaround Time
+        double avgWaitingTime = (double) totalWaitingTime / n;
+        double avgTurnaroundTime = (double) totalTurnaroundTime / n;
+
+        System.out.printf("Average Waiting Time= %.1f\n", avgWaitingTime);
+        System.out.printf("Average Turnaround Time= %.1f\n", avgTurnaroundTime);
+    }
+}
+
+
+//Q.6 Round Robin
+import java.util.Scanner;
+
+public class RoundRobin {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input: Number of processes
+        System.out.print("Enter the number of process (maximum 10) = ");
+        int n = sc.nextInt();
+
+        int[] burstTime = new int[n];
+        int[] remainingTime = new int[n];
+        int[] waitingTime = new int[n];
+        int[] turnaroundTime = new int[n];
+
+        // Input: Burst times
+        System.out.println("Enter the burst time of the process");
+        for (int i = 0; i < n; i++) {
+            System.out.print("P" + i + " = ");
+            burstTime[i] = sc.nextInt();
+            remainingTime[i] = burstTime[i];  // Initialize remaining time
+        }
+
+        // Input: Quantum time
+        System.out.print("Enter the quantum time: ");
+        int quantum = sc.nextInt();
+
+        // Initialize variables
+        int time = 0, completed = 0;
+
+        // Loop until all processes are completed
+        while (completed < n) {
+            for (int i = 0; i < n; i++) {
+                if (remainingTime[i] > 0) {
+                    // Execute the process for quantum or remaining time
+                    int execTime = Math.min(quantum, remainingTime[i]);
+                    time += execTime;
+                    remainingTime[i] -= execTime;
+
+                    // If process finishes, update its TAT and WT
+                    if (remainingTime[i] == 0) {
+                        completed++;
+                        turnaroundTime[i] = time;  // Completion time = TAT
+                        waitingTime[i] = turnaroundTime[i] - burstTime[i];
+                    }
+                }
+            }
+        }
+
+        // Calculate average WT and TAT
+        double totalWT = 0, totalTAT = 0;
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("Process   Burst Time   Turnaround Time   Waiting Time");
+        System.out.println("--------------------------------------------------------------------------------");
+
+        for (int i = 0; i < n; i++) {
+            System.out.printf("  %d        %d            %d                %d\n", 
+                              i + 1, burstTime[i], turnaroundTime[i], waitingTime[i]);
+            totalWT += waitingTime[i];
+            totalTAT += turnaroundTime[i];
+        }
+
+        // Print average WT and TAT
+        System.out.printf("\nAverage waiting Time = %.2f\n", totalWT / n);
+        System.out.printf("Average turnaround time = %.2f\n", totalTAT / n);
+    }
+}
+
+
+//Q.7 FIFO Page Replacement
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class FIFOPageReplacement {
+
+    public static void main(String[] args) {
+        int[] pages = {1, 2, 3, 2, 1, 5, 2, 1, 6, 2, 5, 6, 3, 1, 3};  // Page reference stream
+        int frames = 3;  // Number of available frames
+
+        fifoPageReplacement(pages, frames);
+    }
+
+    // Method to perform FIFO Page Replacement
+    public static void fifoPageReplacement(int[] pages, int frames) {
+        Queue<Integer> queue = new LinkedList<>();  // To hold the pages in FIFO order
+        int pageFaults = 0;
+
+        System.out.println("Page     Frame1          Frame2          Frame3");
+
+        for (int page : pages) {
+            System.out.print(page + ":       ");
+
+            // Check if the page is already in the queue (hit)
+            if (!queue.contains(page)) {
+                // If the queue is full, remove the oldest page (FIFO logic)
+                if (queue.size() == frames) {
+                    queue.poll();
+                }
+                // Add the new page to the queue
+                queue.add(page);
+                pageFaults++;  // Increment page fault count
+            }
+
+            printFrames(queue, frames);  // Print the current state of frames
+        }
+
+        System.out.println("Page Fault: " + pageFaults);
+    }
+
+    // Method to print the current state of frames
+    public static void printFrames(Queue<Integer> queue, int frames) {
+        Integer[] frameArray = queue.toArray(new Integer[0]);  // Convert queue to array for easy printing
+
+        // Print each frame's content or leave it blank if not occupied
+        for (int i = 0; i < frames; i++) {
+            if (i < frameArray.length) {
+                System.out.print(frameArray[i] + "               ");
+            } else {
+                System.out.print("                ");
+            }
+        }
+        System.out.println();
+    }
+}
