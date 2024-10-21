@@ -1,0 +1,620 @@
+﻿Q.1 a. Sequential Statements
+       b. unconstrained loop
+
+
+DECLARE
+v_sum NUMBER := 0;
+v_counter INTEGER;
+BEGIN
+v_counter := 1;
+LOOP
+v_sum := v_sum + v_counter;
+IF v_counter = 10 THEN
+EXIT;
+END IF;
+v_counter := v_counter + 1;
+END LOOP;
+DBMS_OUTPUT.PUT_LINE('The sum of the first 10 natural numbers is: ' || v_sum);
+END;
+/
+
+
+Q.2 
+a. Creating simple Sequences with clauses like START WITH, INCREMENT BY, MAXVALUE, MINVALUE, CYCLE | NOCYCLE, CACHE | NOCACHE, ORDER | NOORECER.
+b. Creating and using Sequences for tables.
+
+
+CREATE SEQUENCE my_sequence
+START WITH 1 
+INCREMENT BY 1 
+MINVALUE 1 
+MAXVALUE 1000 
+CYCLE
+CACHE 10;
+CREATE TABLE employees (
+employee_id NUMBER PRIMARY KEY,
+first_name VARCHAR2(50),
+last_name VARCHAR2(50)
+);
+INSERT INTO employees (employee_id, first_name, last_name)
+VALUES (my_sequence.NEXTVAL, 'John', 'Doe');
+INSERT INTO employees (employee_id, first_name, last_name)
+VALUES (my_sequence.NEXTVAL, 'Jane', 'Smith');
+INSERT INTO employees (employee_id, first_name, last_name)
+VALUES (my_sequence.NEXTVAL, 'Alice', 'Johnson');
+SELECT * FROM employees;
+
+
+Q.3 
+a. If...then...Else, IF...ELSIF...ELSE... END IF
+b. Case statement
+
+
+DECLARE
+v_score NUMBER := 85;
+v_grade CHAR(1);
+v_feedback VARCHAR2(100);
+
+
+BEGIN
+IF v_score >= 90 THEN
+v_grade := 'A';
+v_feedback := 'Excellent work!';
+ELSIF v_score >= 80 THEN
+v_grade := 'B';
+v_feedback := 'Good job!';
+ELSIF v_score >= 70 THEN
+v_grade := 'C';
+v_feedback := 'You passed.';
+ELSIF v_score >= 60 THEN
+v_grade := 'D';
+v_feedback := 'Needs improvement.';
+ELSE
+v_grade := 'F';
+v_feedback := 'Failed. Please try again.';
+END IF;
+
+
+DBMS_OUTPUT.PUT_LINE('Score: ' || v_score);
+DBMS_OUTPUT.PUT_LINE('Grade: ' || v_grade);
+DBMS_OUTPUT.PUT_LINE('Feedback: ' || v_feedback);
+
+
+CASE v_grade
+WHEN 'A' THEN
+DBMS_OUTPUT.PUT_LINE('Outstanding performance!');
+WHEN 'B' THEN
+DBMS_OUTPUT.PUT_LINE('Well done!');
+WHEN 'C' THEN
+DBMS_OUTPUT.PUT_LINE('You did it!');
+WHEN 'D' THEN
+DBMS_OUTPUT.PUT_LINE('Keep working at it!');
+WHEN 'F' THEN
+DBMS_OUTPUT.PUT_LINE('Don’t give up!');
+ELSE
+DBMS_OUTPUT.PUT_LINE('Invalid grade.');
+END CASE;
+END;
+/
+
+
+Q.4 
+a. While-loop Statements
+b. For-loop Statements.
+
+
+--While Loop
+DECLARE
+v_number NUMBER := 5;
+v_factorial NUMBER := 1;
+v_counter NUMBER := 1;
+BEGIN
+WHILE v_counter <= v_number LOOP
+v_factorial := v_factorial * v_counter;
+v_counter := v_counter + 1;
+END LOOP;
+DBMS_OUTPUT.PUT_LINE('Factorial of ' || v_number || ' is: ' || v_factorial);
+END;
+/
+
+
+--For Loop 
+DECLARE
+v_sum NUMBER := 0;
+BEGIN
+FOR v_counter IN 1..10 LOOP
+v_sum := v_sum + v_counter;
+END LOOP;
+DBMS_OUTPUT.PUT_LINE('The sum of the first 10 natural numbers is: ' || v_sum);
+END;
+/
+
+
+Q.5 Writing PL/SQL Blocks with basic programming constructs by including a GoTO
+to jump out of a loop and NULL as a statement inside IF.
+
+
+DECLARE
+v_counter NUMBER := 1;
+v_exit_condition NUMBER := 5;
+BEGIN
+LOOP
+IF v_counter = v_exit_condition THEN
+GOTO exit_loop;
+ELSE
+DBMS_OUTPUT.PUT_LINE('Current counter: ' || v_counter);
+END IF;
+v_counter := v_counter + 1;
+END LOOP;
+exit_loop:
+NULL;
+DBMS_OUTPUT.PUT_LINE('Exited the loop at counter: ' || v_counter);
+END;
+/
+
+
+Q.6 Writing Procedures in PL/SQL Block
+a. Create an empty procedure, replace a procedure and call procedure
+b. Create a stored procedure and call it
+c. Define procedure to insert data
+d. A forward declaration of procedure
+
+
+a :
+CREATE OR REPLACE PROCEDURE empty_procedure IS
+BEGIN
+NULL;
+END empty_procedure;
+/
+
+
+CREATE OR REPLACE PROCEDURE empty_procedure IS
+BEGIN
+DBMS_OUTPUT.PUT_LINE('This is an updated procedure.');
+END empty_procedure;
+/
+
+
+BEGIN
+empty_procedure;
+END;
+/
+
+
+b :
+CREATE OR REPLACE PROCEDURE greet_user(p_username IN VARCHAR2) IS
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Hello, ' || p_username || '!');
+END greet_user;
+/
+
+
+BEGIN
+greet_user('Alice');
+END;
+/
+
+
+c :
+CREATE TABLE employees(id NUMBER, name VARCHAR2(50));
+
+
+CREATE OR REPLACE PROCEDURE insert_employee(p_id IN NUMBER, p_name IN
+VARCHAR2) IS
+BEGIN
+INSERT INTO employees (id, name) VALUES (p_id, p_name);
+COMMIT;
+END insert_employee;
+/
+
+
+BEGIN
+insert_employee(1, 'John Doe');
+END;
+/
+
+
+SELECT * FROM employees;
+
+
+d :
+CREATE OR REPLACE PROCEDURE helper_procedure IS
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Helper procedure called.');
+END helper_procedure;
+/
+
+
+CREATE OR REPLACE PROCEDURE main_procedure IS
+BEGIN
+    helper_procedure;
+    DBMS_OUTPUT.PUT_LINE('Main procedure called.');
+END main_procedure;
+/
+
+
+BEGIN
+    main_procedure;
+END;
+/
+
+Q.7 Writing Functions in PL/SQL Block.
+
+a. Define and Call a Function
+CREATE OR REPLACE FUNCTION add_numbers(
+p_num1 NUMBER,
+p_num2 NUMBER
+) RETURN NUMBER IS
+BEGIN
+RETURN p_num1 + p_num2;
+END add_numbers;
+/
+
+DECLARE
+v_result NUMBER;
+BEGIN
+v_result := add_numbers(10, 20);
+DBMS_OUTPUT.PUT_LINE('The result is: ' || v_result);
+END;
+
+b. Define and Use Function in SELECT Clause
+CREATE OR REPLACE FUNCTION add_numbers(
+p_num1 NUMBER,
+p_num2 NUMBER
+) RETURN NUMBER IS
+BEGIN
+RETURN p_num1 + p_num2;
+END add_numbers;
+/
+CREATE TABLE numbers (
+num1 NUMBER,
+num2 NUMBER
+);
+INSERT INTO numbers (num1, num2) VALUES (10, 20);
+INSERT INTO numbers (num1, num2) VALUES (30, 40);
+INSERT INTO numbers (num1, num2) VALUES (50, 60);
+COMMIT;
+
+SELECT num1, num2, add_numbers(num1, num2) AS sum
+FROM numbers;
+
+c. Call Function in DBMS_OUTPUT.PUT_LINE
+CREATE OR REPLACE FUNCTION add_numbers(
+p_num1 NUMBER,
+p_num2 NUMBER
+) RETURN NUMBER IS
+BEGIN
+RETURN p_num1 + p_num2;
+END add_numbers;
+/
+
+DECLARE
+v_num1 NUMBER := 30;
+v_num2 NUMBER := 50;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('The sum of ' || v_num1 || ' and ' || v_num2 || ' is: ' ||
+add_numbers(v_num1, v_num2));
+END;
+
+d. Recursive Function for Factorial
+CREATE OR REPLACE FUNCTION factorial(n NUMBER) RETURN NUMBER IS
+BEGIN
+    IF n = 0 OR n = 1 THEN
+        RETURN 1;
+    ELSE
+        RETURN n * factorial(n - 1);
+    END IF;
+END;
+/
+DECLARE
+    v_factorial NUMBER;
+BEGIN
+    v_factorial := factorial(5);
+    DBMS_OUTPUT.PUT_LINE('The factorial of 5 is: ' || v_factorial);
+END;
+/
+
+e. Count Employees from a Function
+CREATE TABLE employees (
+    emp_id      NUMBER PRIMARY KEY,
+    first_name  VARCHAR2(50),
+    last_name   VARCHAR2(50),
+    department  VARCHAR2(50),
+    salary      NUMBER
+);
+/
+
+INSERT INTO employees (emp_id, first_name, last_name, department, salary) VALUES (1, 'John', 'Doe', 'HR', 50000);
+INSERT INTO employees (emp_id, first_name, last_name, department, salary) VALUES (2, 'Jane', 'Smith', 'Finance', 60000);
+INSERT INTO employees (emp_id, first_name, last_name, department, salary) VALUES (3, 'Emily', 'Davis', 'IT', 75000);
+INSERT INTO employees (emp_id, first_name, last_name, department, salary) VALUES (4, 'Michael', 'Brown', 'Marketing', 45000);
+INSERT INTO employees (emp_id, first_name, last_name, department, salary) VALUES (5, 'David', 'Wilson', 'IT', 80000);
+COMMIT;
+/
+
+CREATE OR REPLACE FUNCTION count_employees RETURN NUMBER IS
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_count FROM employees;
+    RETURN v_count;
+END;
+/
+
+DECLARE
+    v_emp_count NUMBER;
+BEGIN
+    v_emp_count := count_employees();
+    DBMS_OUTPUT.PUT_LINE('Total number of employees: ' || v_emp_count);
+END;
+/
+
+f. Call Function and Store the Return Value to a Variable
+CREATE OR REPLACE FUNCTION add_numbers(
+p_num1 NUMBER,
+p_num2 NUMBER
+) RETURN NUMBER IS
+BEGIN
+RETURN p_num1 + p_num2;
+END add_numbers;
+/
+
+DECLARE
+v_result NUMBER;
+BEGIN
+v_result := add_numbers(15, 25);
+DBMS_OUTPUT.PUT_LINE('The result of addition is: ' || v_result);
+END;
+
+Q.8 Creating and working with Insert/Update/Delete Trigger using Before/After clause.
+CREATE TABLE employees (
+    emp_id      NUMBER PRIMARY KEY,
+    first_name  VARCHAR2(50),
+    last_name   VARCHAR2(50),
+    department  VARCHAR2(50),
+    salary      NUMBER
+);
+/
+CREATE TABLE employee_log (
+    log_id      NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    action      VARCHAR2(10),
+    employee_id NUMBER,
+    log_time    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+/
+CREATE OR REPLACE TRIGGER before_insert_employee
+BEFORE INSERT ON employees
+FOR EACH ROW
+BEGIN
+    IF :NEW.salary < 30000 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Salary must be at least 30,000');
+    END IF;
+END;
+/
+CREATE OR REPLACE TRIGGER after_insert_employee
+AFTER INSERT ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_log (action, employee_id)
+    VALUES ('INSERT', :NEW.emp_id);
+END;
+/
+INSERT INTO employees (emp_id, first_name, last_name, department, salary)
+VALUES (2, 'Bob', 'Smith', 'HR', 25000);
+SELECT * FROM employee_log;
+
+
+CREATE OR REPLACE TRIGGER before_update_employee
+BEFORE UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    IF :NEW.salary < :OLD.salary THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Salary cannot be decreased');
+    END IF;
+END;
+/
+CREATE OR REPLACE TRIGGER after_update_employee
+AFTER UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_log (action, employee_id)
+    VALUES ('UPDATE', :NEW.emp_id);
+END;
+/
+UPDATE employees
+SET salary = 40000
+WHERE emp_id = 1;
+SELECT * FROM employee_log;
+
+
+CREATE TABLE employees (
+    emp_id      NUMBER PRIMARY KEY,
+    first_name  VARCHAR2(50),
+    last_name   VARCHAR2(50),
+    department  VARCHAR2(50),
+    salary      NUMBER
+);
+/
+CREATE TABLE department (
+    dept_id      NUMBER PRIMARY KEY,
+    dept_name    VARCHAR2(50),
+    employee_id  NUMBER,
+    CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employees(emp_id)
+);
+/
+CREATE TABLE employee_log (
+    log_id      NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    action      VARCHAR2(10),
+    employee_id NUMBER,
+    log_time    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+/
+CREATE OR REPLACE TRIGGER before_delete_employee
+BEFORE DELETE ON employees
+FOR EACH ROW
+BEGIN
+    IF EXISTS (SELECT 1 FROM department WHERE employee_id = :OLD.emp_id) THEN
+        RAISE_APPLICATION_ERROR(-20003, 'Cannot delete employee; they are part of a department');
+    END IF;
+END;
+/
+CREATE OR REPLACE TRIGGER after_delete_employee
+AFTER DELETE ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_log (action, employee_id)
+    VALUES ('DELETE', :OLD.emp_id);
+END;
+/
+INSERT INTO employees (emp_id, first_name, last_name, department, salary)
+VALUES (1, 'John', 'Doe', 'IT', 50000);
+INSERT INTO department (dept_id, dept_name, employee_id)
+VALUES (1, 'IT Department', 1);
+DELETE FROM employees WHERE emp_id = 1;
+
+
+Q.9 Write an Implicit and explicit cursor to complete the task.
+
+CREATE TABLE employees (
+    emp_id      NUMBER PRIMARY KEY,
+    name        VARCHAR2(100),
+    department  VARCHAR2(50),
+    salary      NUMBER
+);
+/
+INSERT INTO employees (emp_id, name, department, salary) 
+VALUES (1, 'Alice Johnson', 'IT', 60000);
+INSERT INTO employees (emp_id, name, department, salary) 
+VALUES (2, 'Bob Smith', 'HR', 45000);
+INSERT INTO employees (emp_id, name, department, salary) 
+VALUES (3, 'Charlie Davis', 'Finance', 50000);
+/
+DECLARE
+    employee_name VARCHAR(100);
+    employee_salary NUMBER;
+BEGIN
+    FOR employee_rec IN (SELECT name, salary FROM employees) LOOP
+        employee_name := employee_rec.name;
+        employee_salary := employee_rec.salary;
+        DBMS_OUTPUT.PUT_LINE('Employee Name: ' || employee_name || ', Salary: ' || employee_salary);
+    END LOOP;
+END;
+/
+
+
+Q.10 create packages and use it in SQL black to complete the task.
+
+CREATE OR REPLACE PACKAGE number_operations AS
+    FUNCTION add_numbers(p_num1 NUMBER, p_num2 NUMBER) RETURN NUMBER;
+    PROCEDURE display_result(v_result NUMBER);
+END number_operations;
+/
+CREATE OR REPLACE PACKAGE BODY number_operations AS
+    FUNCTION add_numbers(p_num1 NUMBER, p_num2 NUMBER) RETURN NUMBER IS
+    BEGIN
+        RETURN p_num1 + p_num2;
+    END add_numbers;
+
+    PROCEDURE display_result(v_result NUMBER) IS
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE('The result is: ' || v_result);
+    END display_result;
+END number_operations;
+/
+DECLARE
+    v_result NUMBER;
+BEGIN
+    v_result := number_operations.add_numbers(10, 20);
+    number_operations.display_result(v_result);
+END;
+/
+
+
+Q.11 Write a SQL block to handle exception by writing:
+a. Predefined Exceptions,
+b. User-Defined Exceptions,
+c. Redeclared Predefined Exceptions,
+
+CREATE TABLE employees (
+    id NUMBER PRIMARY KEY,
+    name VARCHAR2(100),
+    salary NUMBER
+);
+INSERT INTO employees (id, name, salary) VALUES (1, 'John Doe', 50000);
+INSERT INTO employees (id, name, salary) VALUES (2, 'Jane Smith', 60000);
+INSERT INTO employees (id, name, salary) VALUES (3, 'Alice Johnson', 70000);
+DECLARE
+    no_data_found EXCEPTION;
+    user_defined_error EXCEPTION;
+    zero_division EXCEPTION;
+    v_salary NUMBER;
+    v_number1 NUMBER := 10;
+    v_number2 NUMBER := 0;
+BEGIN
+    BEGIN
+        SELECT salary INTO v_salary FROM employees WHERE id = 999;
+    EXCEPTION
+        WHEN no_data_found THEN
+            DBMS_OUTPUT.PUT_LINE('Predefined Exception: No data found for the specified ID.');
+            v_salary := 0;
+    END;
+    IF v_number2 = 0 THEN
+        RAISE user_defined_error;
+    END IF;
+    BEGIN
+        v_salary := v_number1 / v_number2;
+    EXCEPTION
+        WHEN ZERO_DIVISION THEN
+            DBMS_OUTPUT.PUT_LINE('Redeclared Predefined Exception: Division by zero error.');
+    END;
+EXCEPTION
+    WHEN user_defined_error THEN
+        DBMS_OUTPUT.PUT_LINE('User-Defined Exception: Division by zero is not allowed.');
+END;
+/
+
+
+Q.12 Create nested tables and work with nested tables
+
+CREATE OR REPLACE TYPE employee_type AS OBJECT (
+    id NUMBER,
+    name VARCHAR2(100),
+    salary NUMBER
+);
+/
+CREATE OR REPLACE TYPE employee_table AS TABLE OF employee_type;
+/
+CREATE TABLE department (
+    dept_id NUMBER PRIMARY KEY,
+    dept_name VARCHAR2(100),
+    employees employee_table
+) NESTED TABLE employees STORE AS employees_nt;
+/
+INSERT INTO department (dept_id, dept_name, employees) VALUES (
+    1,
+    'Sales',
+    employee_table(employee_type(1, 'Alice', 60000), employee_type(2, 'Bob', 50000))
+);
+INSERT INTO department (dept_id, dept_name, employees) VALUES (
+    2,
+    'HR',
+    employee_table(employee_type(3, 'Charlie', 70000), employee_type(4, 'Diana', 55000))
+);
+/
+SELECT d.dept_id, d.dept_name, e.id, e.name, e.salary
+FROM department d, TABLE(d.employees) e;
+/
+UPDATE department d
+SET employees = employee_table(
+    employee_type(1, 'Alice', 65000),
+    employee_type(2, 'Bob', 50000)
+)
+WHERE d.dept_id = 1;
+/
+UPDATE department d
+SET employees = employee_table(
+    SELECT employee_type(id, name, salary) 
+    FROM TABLE(d.employees) 
+    WHERE id != 1
+)
+WHERE d.dept_id = 1;
+/
