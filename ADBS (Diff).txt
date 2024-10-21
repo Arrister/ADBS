@@ -1,0 +1,564 @@
+Pract 1
+Writing PL/SQL Blocks with basic programming constructs by including
+following:
+a. Sequential Statements
+b. unconstrained loop
+
+program:
+DECLARE
+  v_sum NUMBER := 0;
+  v_counter INTEGER;
+BEGIN
+  v_counter := 1;
+  LOOP
+    v_sum := v_sum + v_counter;
+    IF v_counter = 10 THEN
+      EXIT;
+    END IF;
+    v_counter := v_counter + 1;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('The sum of first 10 natural number is:' || v_sum);
+END;
+/
+
+Pract 2
+Sequences:
+a. Creating simple Sequences with clauses like START WITH, INCREMENT
+BY, MAXVALUE, MINVALUE, CYCLE | NOCYCLE, CACHE |
+NOCACHE, ORDER | NOORECER.
+b. Creating and using Sequences for tables.
+
+program:
+step 1:
+CREATE SEQUENCE my_sequence
+START WITH 1 -- Starting value
+INCREMENT BY 1 -- Increment value
+MINVALUE 1 -- Minimum value
+MAXVALUE 1000 -- Maximum value
+CYCLE -- Allow cycling back to the minimum value
+CACHE 10;
+
+step2:
+CREATE TABLE employees (
+employee_id NUMBER PRIMARY KEY,
+first_name VARCHAR2(50),
+last_name VARCHAR2(50)
+);
+
+step 3:
+INSERT INTO employees (employee_id, first_name, last_name)
+VALUES (my_sequence.NEXTVAL, 'John', 'Doe');
+
+step 4:
+SELECT * FROM employees;
+
+Pract 3
+Writing PL/SQL Blocks with basic programming constructs by including
+following:
+a. If...then...Else, IF...ELSIF...ELSE... END IF
+b. Case statement
+
+
+program 3:
+A. DECLARE
+v_score NUMBER := 85;
+v_grade CHAR(1);
+v_feedback VARCHAR2(100);
+
+
+BEGIN
+IF v_score >= 90 THEN
+v_grade := 'A';
+v_feedback := 'Excellent work!';
+ELSIF v_score >= 80 THEN
+v_grade := 'B';
+v_feedback := 'Good job!';
+ELSIF v_score >= 70 THEN
+v_grade := 'C';
+v_feedback := 'You passed.';
+ELSIF v_score >= 60 THEN
+v_grade := 'D';
+v_feedback := 'Needs improvement.';
+ELSE
+v_grade := 'F';
+v_feedback := 'Failed. Please try again.';
+END IF;
+
+
+DBMS_OUTPUT.PUT_LINE('Score: ' || v_score);
+DBMS_OUTPUT.PUT_LINE('Grade: ' || v_grade);
+DBMS_OUTPUT.PUT_LINE('Feedback: ' || v_feedback);
+END;
+/
+B.DECLARE
+  v_grade CHAR(1) := 'B';  -- Example grade value
+BEGIN
+  CASE v_grade
+    WHEN 'A' THEN
+      DBMS_OUTPUT.PUT_LINE('Excellent');
+    WHEN 'B' THEN
+      DBMS_OUTPUT.PUT_LINE('Good');
+    WHEN 'C' THEN
+      DBMS_OUTPUT.PUT_LINE('Average');
+    ELSE
+      DBMS_OUTPUT.PUT_LINE('Invalid grade');
+  END CASE;
+END;
+/
+
+Pract 4
+Writing PL/SQL Blocks with basic programming constructs for following
+Iterative
+Structure:
+a. While-loop Statements
+b. For-loop Statements.
+
+program 4:
+A.while loop
+DECLARE
+  v_number NUMBER := 5;
+  v_fact NUMBER := 1;
+  v_counter NUMBER := 1;
+BEGIN
+  WHILE v_counter <= v_number LOOP
+    v_fact := v_fact * v_counter;
+    v_counter := v_counter + 1;
+  END LOOP;
+  
+  DBMS_OUTPUT.PUT_LINE('Factorial of  '|| v_number  ||'is '||v_fact);
+END;
+/
+
+B.For-loop Statements.
+DECLARE
+  v_sum NUMBER := 0;
+BEGIN
+  FOR v_counter IN 1..10 LOOP
+    v_sum := v_sum + v_counter;
+  END LOOP;
+  
+  DBMS_OUTPUT.PUT_LINE('The first 10 natural number is: '|| v_sum);
+END;
+/
+
+Pract 5
+Writing PL/SQL Blocks with basic programming constructs by including a GoTO
+to
+jump out of a loop and NULL as a statement inside IF
+
+program:
+DECLARE
+  v_counter NUMBER := 1;
+  v_exit_condition NUMBER := 5;
+BEGIN
+  LOOP
+    IF v_counter = v_exit_condition THEN
+      GOTO exit_loop;
+    ELSIF v_counter MOD 2 = 0 THEN
+      NULL;
+    ELSE
+      DBMS_OUTPUT.PUT_LINE('Current count: ' || v_counter);
+    END IF;
+    
+    v_counter := v_counter + 1;
+  END LOOP;
+  
+  exit_loop:
+    DBMS_OUTPUT.PUT_LINE('Exited loop at count: ' || v_counter);
+END;
+/
+
+
+Pract 6
+Writing Procedures in PL/SQL Block
+a. Create an empty procedure, replace a procedure and call procedure
+b. Create a stored procedure and call it
+c. Define procedure to insert data
+d. A forward declaration of procedure
+
+program:
+
+a:
+CREATE OR REPLACE PROCEDURE empty_procedure IS
+BEGIN
+NULL;
+END empty_procedure;
+/
+
+
+CREATE OR REPLACE PROCEDURE empty_procedure IS
+BEGIN
+DBMS_OUTPUT.PUT_LINE('This is an updated procedure.');
+END empty_procedure;
+/
+
+
+BEGIN
+empty_procedure;
+END;
+/
+
+b :
+CREATE OR REPLACE PROCEDURE greet_user(p_username IN VARCHAR2) IS
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Hello, ' || p_username || '!');
+END greet_user;
+/
+
+
+BEGIN
+greet_user('Alice');
+END;
+/
+
+
+c:
+CREATE TABLE employeess (
+  employee_id   NUMBER PRIMARY KEY,
+  employee_name VARCHAR2(100),
+  salary        NUMBER
+);
+
+
+CREATE OR REPLACE PROCEDURE insert_employee (
+  p_employee_id   NUMBER,
+  p_employee_name VARCHAR2,
+  p_salary        NUMBER
+)
+IS
+BEGIN
+  INSERT INTO employeess (employee_id, employee_name, salary)
+  VALUES (p_employee_id, p_employee_name, p_salary);
+  
+  COMMIT;
+END insert_employee;
+/
+
+BEGIN
+  insert_employee(101, 'John Doe', 50000);
+END;
+/
+
+
+d: 
+CREATE OR REPLACE PROCEDURE helper_procedure IS
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Helper procedure called.');
+END helper_procedure;
+/
+
+
+CREATE OR REPLACE PROCEDURE main_procedure IS
+BEGIN
+    helper_procedure;
+    DBMS_OUTPUT.PUT_LINE('Main procedure called.');
+END main_procedure;
+/
+
+
+BEGIN
+    main_procedure;
+END;
+/
+
+
+Pract 7
+Writing Functions in PL/SQL Block.
+a. Define and call a function
+b. Define and use function in select clause,
+c. Call function in dbms_output.put_line
+d. recursive function
+e count employee from a function and return value to a variable
+f. call function and store the return value to a variable
+
+program:
+
+a.
+CREATE OR REPLACE FUNCTION add_number(
+v_num1 NUMBER,
+v_num2 NUMBER
+) RETURN NUMBER IS 
+BEGIN 
+RETURN v_num1 + v_num2;
+END add_number;
+/
+
+DECLARE
+v_result NUMBER;
+BEGIN
+v_result := add_number(5, 10);
+DBMS_OUTPUT.PUT_LINE('THE RESULT IS:'|| v_result);
+END;
+/
+
+b.
+CREATE TABLE number_sum(
+num1 NUMBER,
+num2 NUMBER
+);
+
+INSERT INTO number_sum(num1, num2) VALUES(10,20);
+INSERT INTO number_sum(num1, num2) VALUES(20,30);
+INSERT INTO number_sum(num1, num2) VALUES(40,50);
+COMMIT;
+
+SELECT num1,num2,add_number(num1, num2) AS FROM 
+number_sum;
+
+c.
+CREATE OR REPLACE FUNCTION get_greeting(p_name VARCHAR2)
+RETURN VARCHAR2
+IS
+BEGIN
+  RETURN 'Hello, ' || p_name || '!';
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(get_greeting('Asif'));
+END;
+/
+
+
+d.
+CREATE OR REPLACE FUNCTION factorial(n NUMBER) 
+RETURN NUMBER IS
+BEGIN
+  IF n <= 1 THEN
+    RETURN 1;
+  ELSE
+    RETURN n * factorial(n - 1);
+  END IF;
+END factorial;
+/
+
+-- Call the recursive function
+DECLARE
+  v_factorial NUMBER;
+BEGIN
+  v_factorial := factorial(5);
+  DBMS_OUTPUT.PUT_LINE('The factorial of 5 is: ' || v_factorial);
+END;
+/
+
+e.
+CREATE TABLE employees(
+emp_id NUMBER,
+emp_name VERCHAR2
+);
+
+CREATE OR REPLACE FUNCTION count_employees RETURN NUMBER IS 
+v_count NUMBER;
+BEGIN
+SELECT COUNT(*) INTO v_count FROM employees;
+return v_count;
+END count_employees;
+/
+
+call it
+
+DECLARE 
+v_emp_count NUMBER;
+BEGIN
+v_emp_count := count_employees();
+DBMS_OUTPUT.PUT_LINE('the total number of employees count is:'|| v_emp_count);
+END;
+/
+
+f. writing sn a. program in f
+
+Pract 8
+Creating and working with Insert/Update/Delete Trigger using Before/After
+clause.
+
+program:
+
+CREATE TABLE employees (
+    emp_id NUMBER PRIMARY KEY,
+    name VARCHAR2(50),
+    salary NUMBER
+);
+
+CREATE TABLE employee_logs (
+    log_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    emp_id NUMBER,
+    action VARCHAR2(10),
+    old_salary NUMBER,
+    new_salary NUMBER,
+    change_date TIMESTAMP DEFAULT SYSTIMESTAMP
+);
+
+CREATE OR REPLACE TRIGGER before_insert_employees
+BEFORE INSERT ON employees
+FOR EACH ROW
+BEGIN
+    IF :NEW.salary IS NULL THEN
+        :NEW.salary := 30000; -- Default salary
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER after_update_employees
+AFTER UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_logs (emp_id, action, old_salary, new_salary)
+    VALUES (:OLD.emp_id, 'UPDATE', :OLD.salary, :NEW.salary);
+END;
+/
+
+CREATE OR REPLACE TRIGGER after_delete_employees
+AFTER DELETE ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_logs (emp_id, action, old_salary)
+    VALUES (:OLD.emp_id, 'DELETE', :OLD.salary);
+END;
+/
+
+INSERT INTO employees (emp_id, name) VALUES (1, 'Alice');
+
+UPDATE employees SET salary = 50000 WHERE emp_id = 1;
+
+SELECT * FROM employee_logs;
+
+pract9
+Write an Implicit and explicit cursor to complete the task.
+
+program:
+Step 1: Create a Sample Table
+CREATE TABLE employees (
+    employee_id NUMBER PRIMARY KEY,
+    employee_name VARCHAR2(100),
+    salary NUMBER
+);
+
+Step 2: Insert Sample Data
+INSERT INTO employees (employee_id, employee_name, salary) VALUES (1, 'John Doe', 50000);
+INSERT INTO employees (employee_id, employee_name, salary) VALUES (2, 'Jane Smith', 60000);
+COMMIT;
+
+step3:SELECT * FROM employees;
+
+Using Implicit Cursor
+DECLARE
+  v_employee_name VARCHAR2(100);
+BEGIN
+  FOR rec IN (SELECT employee_name, salary FROM employees) LOOP
+    v_employee_name := rec.employee_name;
+    DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_employee_name);
+  END LOOP;
+END;
+/
+
+Using Explicit Cursor
+DECLARE
+  CURSOR emp_cursor IS
+    SELECT employee_name FROM employees;
+    
+  v_employee_name VARCHAR2(100);
+BEGIN
+  OPEN emp_cursor;
+  
+  LOOP
+    FETCH emp_cursor INTO v_employee_name;
+    EXIT WHEN emp_cursor%NOTFOUND;  
+    
+    DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_employee_name);
+  END LOOP;
+  
+  CLOSE emp_cursor;  
+END;
+/
+
+Pract 10
+create packages and use it in SQL black to complete the task.
+
+program:
+Step 1: Create the Package Specification
+CREATE OR REPLACE PACKAGE addition_pkg IS
+    FUNCTION add_numbers(p_num1 NUMBER, p_num2 NUMBER) RETURN NUMBER;
+END addition_pkg;
+/
+
+
+Step 2: Create the Package Body
+CREATE OR REPLACE PACKAGE BODY addition_pkg IS
+    FUNCTION add_numbers(p_num1 NUMBER, p_num2 NUMBER) RETURN NUMBER IS
+    BEGIN
+        RETURN p_num1 + p_num2;
+    END add_numbers;
+END addition_pkg;
+/
+
+
+Step 3: Use the Package in a SQL Block
+
+DECLARE
+    v_result NUMBER;
+BEGIN
+    v_result := addition_pkg.add_numbers(10, 20);  -- Call the function from the package
+    DBMS_OUTPUT.PUT_LINE('The sum of 10 and 20 is: ' || v_result);
+END;
+/
+
+
+Pract 11
+Write a SQL block to handle exception by writing:
+a. Predefined Exceptions,
+b. User-Defined Exceptions,
+c. Redeclared Predefined Exceptions,
+
+program:
+
+CREATE TABLE employees (
+    emp_id NUMBER PRIMARY KEY,
+    name VARCHAR2(50),
+    salary NUMBER
+);
+
+INSERT INTO employees (emp_id, name, salary) VALUES (1, 'Alice', 50000);
+INSERT INTO employees (emp_id, name, salary) VALUES (2, 'Bob', 60000);
+
+
+DECLARE
+    
+    user_defined_error EXCEPTION;
+
+    
+    zero_division EXCEPTION;
+
+    v_number1 NUMBER := 10;
+    v_number2 NUMBER := 0; 
+    v_result NUMBER;
+
+BEGIN
+    
+    BEGIN
+        SELECT salary INTO v_result FROM employees WHERE emp_id = 999; 
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('Predefined Exception: No data found for the specified ID.');
+    END;
+
+    
+    IF v_number2 = 0 THEN
+        RAISE user_defined_error; 
+    END IF;
+
+    
+    EXCEPTION
+        WHEN user_defined_error THEN
+            DBMS_OUTPUT.PUT_LINE('User-Defined Exception: Division by zero is not allowed.');
+
+    
+    BEGIN
+        v_result := v_number1 / v_number2; 
+    EXCEPTION
+        WHEN ZERO_DIVIDE THEN
+            DBMS_OUTPUT.PUT_LINE('Redeclared Predefined Exception: Division by zero error.');
+    END;
+
+END;
+/
+
