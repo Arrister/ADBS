@@ -1,0 +1,645 @@
+Practical 1.a) Write a program to implement constructor overloading, method overloading and static
+method.
+
+class test {
+    double ar;
+    static int a;
+    String name, city;
+
+    test() {
+        System.out.println("Example of Constructor Overloading");
+        System.out.println("This is a default constructor... Executing first");
+        System.out.println("This is a parameterized constructor");
+    }
+
+    test(String n, String c) {
+        name = n;
+        city = c;
+    }
+
+    void calarea(double radius) {
+        ar = 3.14 * radius * radius;
+        System.out.println("Area of Circle :" + ar);
+    }
+
+    void calarea(double base, double height) {
+        ar = 0.5 * base * height;
+        System.out.println("Area of Triangle :" + ar);
+    }
+
+    static void disp() {
+        a = 10;
+        System.out.println("a : " + a);
+    }
+}
+
+class main1 {
+    public static void main(String args[]) {
+        test obj = new test();
+        test obj1 = new test("Aaron", "Mumbai");
+        System.out.println("Name : " + obj1.name + "\nStudent City : " + obj1.city);
+        obj.calarea(5);
+        obj.calarea(8, 5);
+        System.out.println("Example of Static Method :");
+        test.disp();
+    }
+}
+
+Practical 1.b) Write a program to implement the concept of Inheritance and Method Overriding.
+
+class Base {
+    void display() {
+        System.out.println("Base Class Method");
+    }
+}
+
+class Derived extends Base {
+    void display() {
+        super.display();
+        System.out.println("Derived Class Method");
+    }
+}
+
+class BaseExample {
+    public static void main(String args[]) {
+        Derived obj = new Derived();
+        obj.display();
+    }
+}
+
+Practical 2.a) Write a program to implement abstract methods, classes and functions.
+
+import java.util.*;
+
+abstract class RoundShape {
+    double radius;
+    final double pi = 3.14;
+
+    abstract void findarea();
+
+    abstract void findvolume(); 
+
+    void disp() {
+        System.out.println("This is an example of abstract method");
+    }
+}
+
+class Sphere extends RoundShape {
+    Double area;
+    Scanner sc = new Scanner(System.in);
+
+    void findarea() {
+        System.out.println("Enter radius of sphere");
+        radius = sc.nextDouble();
+        area = 4 * pi * radius * radius;
+        System.out.println("Area of sphere is: " + area);
+    }
+
+    void findvolume() { 
+        System.out.println("Enter radius of sphere");
+        radius = sc.nextDouble();
+        area = (4.0 / 3.0) * pi * (radius * radius * radius); 
+        System.out.println("Volume of sphere is: " + area);
+    }
+}
+
+class tempCodeRunnerFile2 { 
+    public static void main(String[] args) {
+        Sphere s = new Sphere();
+        s.disp();
+        s.findarea();
+        s.findvolume();
+    }
+}
+
+Practical 2.b) Write a program to implement concept of interfaces.
+
+import java.util.*;
+
+interface RoundShape {
+  final double pi = 3.14;
+
+  void findarea();
+
+  void findvolume();
+}
+
+class sphere implements RoundShape {
+  Double area, radius;
+  Scanner sc = new Scanner(System.in);
+
+  public void findarea() {
+    System.out.println("Enter radius of sphere:");
+    radius = sc.nextDouble();
+    area = 4 * pi * radius * radius;
+    System.out.println("Area of sphere is:" + area);
+  }
+
+  public void findvolume() {
+    System.out.println("Enter radius of sphere:");
+    radius = sc.nextDouble();
+    area = (4 / 3) * pi * (radius * radius * radius);
+    System.out.println("Volume of sphere is:" + area);
+  }
+}
+
+class tempCodeRunnerFile3 {
+  public static void main(String[] args) {
+    sphere s = new sphere();
+    s.findarea();
+    s.findvolume();
+  }
+}
+
+
+Practical 3.Write a program to define user-defined exceptions and raise them as per the requirements.
+
+import java.io.*;
+
+class AuthenticationFailure extends Exception {
+    public AuthenticationFailure() {
+        System.out.println("Invalid Password");
+    }
+}
+
+class main4 {
+    public static void main(String args[]) throws IOException {
+        try {
+            String pass;
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Enter Password :");
+            pass = br.readLine();
+            if (pass.equals("rose"))
+                System.out.println("Login Successful");
+            else
+                throw new AuthenticationFailure();
+        } catch (AuthenticationFailure e) {
+            System.out.println(e);
+        }
+    }
+}
+
+Practical 4.a) Write a program to demonstrate the method of list interface.
+
+import java.util.*;
+
+public class JavaExample {
+  public static void main(String args[]) {
+    ArrayList<String> obj = new ArrayList<String>();
+    obj.add("Aject");
+    obj.add("Harry");
+    obj.add("Steve");
+    obj.add("Arju");
+    obj.add("Tom");
+    System.out.println("Original ArrayList");
+    for(String str : obj) {
+      System.out.println(str);
+    }
+    obj.add(0, "Rahul");
+    System.out.println("ArrayList after adding element at position 0");
+    for(String str : obj) {
+      System.out.println(str);
+    }
+    obj.remove("Harry");
+    System.out.println("ArrayList after removing element");
+    for(String str : obj) {
+      System.out.println(str);
+    }
+    obj.remove(1);
+    System.out.println("Final ArrayList");
+    for(String str : obj) {
+      System.out.println(str);
+    }
+  }
+}
+
+Practical 4.b) Write a program to demonstrate the method of Map Interfaces.
+
+import java.util.*;
+
+public class MapExample1 {
+    public static void main(String[] args) {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "Amit");
+        map.put(5, "Rahul");
+        map.put(2, "Jay");
+        map.put(6, "Amit");
+        Set<Map.Entry<Integer, String>> set = map.entrySet();
+        Iterator<Map.Entry<Integer, String>> itr = set.iterator();
+        while (itr.hasNext()) {
+            Map.Entry<Integer, String> entry = itr.next();
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+}
+
+Prcatical 5.Write a program using various swing components design java application to accept a students
+resume (Design Form)
+
+import javax.swing.*;
+
+class FormExample {
+    JFrame main_frame;
+    JLabel lname, lcontact, lemail;
+    JTextField sname, scontact, semail;
+    JRadioButton male, female;
+    ButtonGroup gender;
+    JButton submit, reset;
+
+    FormExample() {
+        main_frame = new JFrame("Simple Form");
+
+        lname = new JLabel("Name");
+        lcontact = new JLabel("Contact Number");
+        lemail = new JLabel("Email");
+        lname.setBounds(10, 20, 100, 30);
+        lcontact.setBounds(10, 60, 100, 30);
+        lemail.setBounds(10, 100, 100, 30);
+
+        sname = new JTextField();
+        scontact = new JTextField();
+        semail = new JTextField();
+        sname.setBounds(120, 20, 200, 30);
+        scontact.setBounds(120, 60, 200, 30);
+        semail.setBounds(120, 100, 200, 30);
+
+        male = new JRadioButton("Male");
+        female = new JRadioButton("Female");
+        male.setBounds(120, 140, 80, 30);
+        female.setBounds(210, 140, 80, 30);
+        gender = new ButtonGroup();
+        gender.add(male);
+        gender.add(female);
+
+        submit = new JButton("Submit");
+        reset = new JButton("Reset");
+        submit.setBounds(120, 180, 100, 30);
+        reset.setBounds(230, 180, 100, 30);
+
+        main_frame.add(lname);
+        main_frame.add(lcontact);
+        main_frame.add(lemail);
+        main_frame.add(sname);
+        main_frame.add(scontact);
+        main_frame.add(semail);
+        main_frame.add(male);
+        main_frame.add(female);
+        main_frame.add(submit);
+        main_frame.add(reset);
+
+        main_frame.setSize(400, 300);
+        main_frame.setLayout(null);
+        main_frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new FormExample();
+    }
+}
+
+
+Practical 6.Write a JDBC program that displays the data of a given table.
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class database {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3307/jdbcdemo";
+        String username = "root";
+        String password = "";
+        
+        try {
+            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+           
+            try (Connection connection = DriverManager.getConnection(url, username, password);
+                 Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery("SELECT * FROM students")) {
+                
+                
+                while (resultSet.next()) {
+                    System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2) + " " + resultSet.getInt(3));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
+    }
+}
+
+Practical 7.Java program to create a simple calculator with basic +,-,/,* operations using Java Swing
+elements.
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+class CalExample extends JFrame implements ActionListener{
+    static JFrame f;
+    static JTextField l;
+    String s0, s1, s2;
+
+   
+    CalExample(){
+        s0 = s1 = s2 = ""; 
+    }
+
+    public static void main(String[] args) {
+        
+        f = new JFrame("Calculator");
+
+        try {
+            
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        
+        CalExample cal = new CalExample();
+
+        
+        l = new JTextField(16);
+        l.setEditable(false);
+
+        
+        JButton b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, be, beq, beq1, ba, bs, bd, bm;
+
+        
+        b0 = new JButton("0");
+        b1 = new JButton("1");
+        b2 = new JButton("2");
+        b3 = new JButton("3");
+        b4 = new JButton("4");
+        b5 = new JButton("5");
+        b6 = new JButton("6");
+        b7 = new JButton("7");
+        b8 = new JButton("8");
+        b9 = new JButton("9");
+
+        
+        be = new JButton(".");
+        beq = new JButton("=");
+        beq1 = new JButton("C");
+        ba = new JButton("+");
+        bs = new JButton("-");
+        bd = new JButton("/");
+        bm = new JButton("*");
+
+       
+        JPanel p = new JPanel();
+
+        
+        bm.addActionListener(cal);
+        bd.addActionListener(cal);
+        ba.addActionListener(cal);
+        bs.addActionListener(cal);
+        b0.addActionListener(cal);
+        b1.addActionListener(cal);
+        b2.addActionListener(cal);
+        b3.addActionListener(cal);
+        b4.addActionListener(cal);
+        b5.addActionListener(cal);
+        b6.addActionListener(cal);
+        b7.addActionListener(cal);
+        b8.addActionListener(cal);
+        b9.addActionListener(cal);
+        be.addActionListener(cal);
+        beq.addActionListener(cal);
+        beq1.addActionListener(cal);
+
+        
+        p.add(l);
+        p.add(bm);
+        p.add(ba);
+        p.add(bs);
+        p.add(bd);
+        p.add(b0);
+        p.add(b1);
+        p.add(b2);
+        p.add(b3);
+        p.add(b4);
+        p.add(b5);
+        p.add(b6);
+        p.add(b7);
+        p.add(b8);
+        p.add(b9);
+        p.add(be);
+        p.add(beq);
+        p.add(beq1);
+
+        
+        p.setBackground(Color.blue);
+
+        
+        f.add(p);
+
+        
+        f.setSize(200, 300);
+        f.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        String s = e.getActionCommand();
+
+        
+        if ((s.charAt(0) >= '0' && s.charAt(0) <= '9') || s.charAt(0) == '.') {
+            if (!s1.equals("")) { 
+                s2 = s2 + s;
+            } else {
+                s0 = s0 + s;
+            }
+            l.setText(s0 + s1 + s2);
+        }
+        
+        else if (s.charAt(0) == 'C') {
+            s0 = s1 = s2 = "";
+            l.setText("");
+        }
+        
+        else if (s.charAt(0) == '=') {
+            double result;
+            
+            if (s1.equals("+"))
+                result = Double.parseDouble(s0) + Double.parseDouble(s2);
+            else if (s1.equals("-"))
+                result = Double.parseDouble(s0) - Double.parseDouble(s2);
+            else if (s1.equals("*"))
+                result = Double.parseDouble(s0) * Double.parseDouble(s2);
+            else if (s1.equals("/"))
+                result = Double.parseDouble(s0) / Double.parseDouble(s2);
+            else
+                result = 0;
+
+            
+            l.setText(s0 + s1 + s2 + "=" + result);
+
+            
+            s0 = Double.toString(result);
+            s1 = s2 = "";
+        }
+        
+        else {
+            if (s1.equals("")) {  
+                s1 = s;
+            } else {  
+                double result;
+                if (s1.equals("+"))
+                    result = Double.parseDouble(s0) + Double.parseDouble(s2);
+                else if (s1.equals("-"))
+                    result = Double.parseDouble(s0) - Double.parseDouble(s2);
+                else if (s1.equals("*"))
+                    result = Double.parseDouble(s0) * Double.parseDouble(s2);
+                else
+                    result = Double.parseDouble(s0) / Double.parseDouble(s2);
+
+                s0 = Double.toString(result);
+                s1 = s;  
+                s2 = "";  
+            }
+            l.setText(s0 + s1 + s2);
+        }
+    }
+}
+
+
+
+
+Practical 8.Write a servlet that accept the username html forms and store it take as a cookie another servlet that
+returns the value of the cookie and servlet.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Username Form</title>
+</head>
+<body>
+    <form action="SetCookieServlet" method="post">
+        Enter your username: <input type="text" name="username">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/SetCookieServlet")
+public class SetCookieServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String username = request.getParameter("username");
+
+        Cookie usernameCookie = new Cookie("username", username);
+        usernameCookie.setMaxAge(60 * 60 * 24); // Cookie valid for 1 day
+
+       
+        response.addCookie(usernameCookie);
+
+        response.setContentType("text/html");
+        response.getWriter().println("Username saved in cookie: " + username);
+    }
+}
+
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/GetCookieServlet")
+public class GetCookieServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        Cookie[] cookies = request.getCookies();
+        String username = null;
+
+        
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("username")) {
+                    username = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        response.setContentType("text/html");
+        if (username != null) {
+            response.getWriter().println("Username from cookie: " + username);
+        } else {
+            response.getWriter().println("No username found in cookies.");
+        }
+    }
+}
+
+Practical 9.Write a register servlet that accepts the data for a given table and servlet it in the database.
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+@WebServlet("/RegisterServlet")
+public class RegisterServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "");
+
+            String query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, password);
+            ps.executeUpdate();
+
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        response.getWriter().println("Registration successful!");
+    }
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <form action="RegisterServlet" method="post">
+        Name: <input type="text" name="name"><br>
+        Email: <input type="email" name="email"><br>
+        Password: <input type="password" name="password"><br>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
