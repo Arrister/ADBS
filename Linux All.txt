@@ -1,0 +1,1035 @@
+1(a) Document Structure Tag
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <head>
+        <style>
+            p {text-align: center;}
+        </style>
+    </head>
+    <body>
+        <h1>This is a header.</h1>
+        <p>This is a paragraph, centered on the page.</p>
+        <p>And this is the second paragraph with <strong>bold text</strong></p>
+    </body>
+</html>
+
+1(b) Various Text Formatting Tags
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h3 align="center"><b><u>Text Formatting</u></b></h3>
+        The text is <p>paragraph</p> <br>
+        The text is <small>small</small> <br>
+        The text is <big>big</big> <br>
+        The text is <b>bold</b> <br>
+        The text is <i>italic</i> <br>
+        The text is <u>undelined</u> <br>
+        The text is <pre>preformatted</pre> <br>
+        The text is <div>div</div> <br>
+        The text is <h1>heading1</h1> <br>
+        The text is <strong>strong</strong> <br>
+        The text is <em>emphasized</em> <br>
+        The text is <strike>striked</strike>
+    </body>
+</html>
+
+1(c) Ordered and Unordered Lists
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>Unordered HTML List</h2>
+        <ul>
+            <li>Coffee</li>
+            <li>Tea</li>
+            <li>Milk</li>
+        </ul>
+        <h2>Ordered HTML List</h2>
+        <ol>
+            <li>Coffee</li>
+            <li>Tea</li>
+            <li>Milk</li>
+        </ol>
+    </body>
+</html>
+
+1(d) Image Maps
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>Image Mapping</h2>
+        <p>Click on the computer to know more about the topic</p>
+        <img src="ss.png" alt="Computer" usemap="#computer" width="400" height="379">
+        <map name="computer">
+            <area shape="rect" coords="34,44,270,340" alt="Computer" href="https://www.google.com"/>
+        </map>
+    </body>
+</html>
+
+2(a) Table Tags
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table, th, td {
+                border: 1px solid blue;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>The Table Element</h1>
+        <table>
+            <tr>
+                <th>Month</th>
+                <th>Savings</th>
+            </tr>
+            <tr>
+                <td>January</td>
+                <td>$80</td>
+            </tr>
+            <tr>
+                <td>February</td>
+                <td>$40</td>
+            </tr>
+        </table>
+    </body>
+</html>
+
+2(b) Form Tags
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Forms in HTML</title>
+    </head>
+    <body>
+        <h2>Registration Form</h2>
+        <form>
+            <label>Enter your full name</label>
+            <input type="text" name="name"> <br>
+            <label>Enter your E-mail</label>
+            <input type="email" name="email"> <br>
+            <label>Enter yor password</label>
+            <input type="password" name="pass"> <br><br>
+            <label>Enter your gender</label> <br>
+            <input type="radio" name="gnder" id="gender" value="male"/>Male <br>
+            <input type="radio" name="gnder" id="gender" value="female"/>Female <br>
+            <input type="radio" name="gnder" id="gender" value="others"/>Others <br>
+            <label>Enter your address</label>
+            <textarea></textarea> <br>
+            <input type="submit" value="Sign-Up">
+        </form>
+    </body>
+</html>
+
+2(c) Navigation of Multiple Web Pages
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>HTML Links</h1>
+        <p> <a href="https://www.facebook.com">Facebook</a> </p>
+        <p> <a href="https://www.google.com">Google</a> </p>
+        <p> <a href="https://www.youtube.com">Youtube</a> </p>
+    </body>
+</html>
+
+2(d) Embedded Multimedia Elements
+<!DOCTYPE html>
+<html>
+    <body>
+        <video width="400" controls>
+            <source src="https://youtu.be/m9s1NQG3TNY?si=TLd0iTCxeoheTn8Z" type="video/mp4">
+            Your browser doesn't supports HTML Videos.
+        </video>
+        <p><a href="https://youtu.be/m9s1NQG3TNY?si=TLd0iTCxeoheTn8Z">watch</a></p>
+    </body>
+</html>
+
+3(a) Change BG 
+<!DOCTYPE html>
+<html>
+    <head>
+    <style>
+        body {
+            background-color: black;
+        }
+        h1 {
+            background-color: white;
+            color:black;
+        }
+        p {
+            color: white;
+        }
+    </style>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+        <p>This page has a black background</p>
+    </body>
+</html>
+
+3(b) Change Fonts and Font Styles
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .p1 {
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 25;
+            }
+            .p2 {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .p3 {
+                font-family: 'Poppins', sans-serif;
+                font-size: 30;
+                font-weight: 100;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>CSS Font-Family</h1>
+        <p class="p1">This is a paragraph with Times new Roman font.</p>
+        <p class="p2">This is a paragraph with Arial font.</p>
+        <p class="p3">This is a paragraph with Poppins font.</p>
+    </body>
+</html>
+
+
+3(c) Positioning an Element
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioning Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .static {
+            background-color: lightblue;
+            padding: 10px;
+        }
+        .relative {
+            position: relative;
+            background-color: lightcoral;
+            padding: 10px;
+            top: 20px;
+            left: 20px;
+        }
+        .absolute {
+            position: absolute;
+            background-color: lightgreen;
+            padding: 10px;
+            top: 100px;
+            left: 100px;
+        }
+        .fixed {
+            position: fixed;
+            background-color: lightgoldenrodyellow;
+            padding: 10px;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="static">Static Positioning</div>
+    <div class="relative">Relative Positioning</div>
+    <div class="absolute">Absolute Positioning</div>
+    <div class="fixed">Fixed Positioning</div>
+
+</body>
+</html>
+
+4(a) Calculating Factorial
+<!DOCTYPE html>
+<html>
+    <head>
+	<script>
+    	     function factorial(){
+        	  var obj=document.getElementById("msg");
+         	  var txt=document.getElementById("num");
+		  var NUM=txt.value;
+         	  if(isNaN(NUM)){
+              		obj.innerHTML="input was incorrect";
+                  }
+         	  else{
+              	    var f=1;
+              	    for(var i=2;i<=NUM;i++){
+                        f=f*i;
+             	    }
+              	   obj.innerHTML="Factorial is:"+f;;
+        	 }
+	    }
+</script>
+</head>
+<body>
+    <p id="msg">This is a text</p>
+    <input type="text"value=""id="num"/>
+    <button onclick="factorial()">Factorial</button>
+</body>
+</html>
+
+4(b) Finding Fibonacci Series
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fibonacci series in JavaScript</title>
+</head>
+
+<body>
+    <script>
+        var n1 = 0, n2 = 1, next_num, i;
+        var num = parseInt(prompt("Enter the limit for Fibonacci series"));
+        document.write("Fibonacci Series:");
+        for (i = 1; i <= num; i++) {
+            document.write("<br>" + n1);
+            next_num = n1 + n2;
+            n1 = n2;
+            n2 = next_num;
+        }
+    </script>
+</body>
+
+</html>
+
+4(c) Evaluating Expressions
+<!DOCTYPE html>
+<html>
+
+<body>
+    <p>Click the button to evaluate/execute JavaScript code/expression.</p>
+    <button onclick="myFunction()">try it</button>
+    <p id="demo"></p>
+    <script>
+        function myFunction() {
+            var x = 10;
+            var y = 20;
+            var a = eval("x*y") + "<br>";
+            var b = eval("2+2") + "<br>";
+            var c = eval("x+17") + "<br>";
+            var res = a + b + c;
+            document.getElementById("demo").innerHTML = res;
+        }
+    </script>
+</body>
+
+</html>
+
+4(d) Reverse of a Number
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reverse Number Calculation</title>
+    <script>
+        function reverseNumber() {
+            var num = document.getElementById("numInput").value;
+            var reversedStr = num.split("").reverse().join("");
+            var reversedNum = parseInt(reversedStr);
+            document.getElementById("result").innerHTML = "Reversed Number: " + reversedNum;
+        }
+    </script>
+</head>
+<body>
+    <h2>Calculate Reverse of a Number</h2>
+    <p>Enter a number:</p>
+    <input type="text" id="numInput">
+    <button onclick="reverseNumber()">Calculate Reverse</button>
+    <p id="result"></p>
+</body>
+</html>
+
+4(B.a) Validation Number
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Validation</title>
+    <style>
+        .output {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .error {
+            color: red;
+        }
+        .valid {
+            color: green;
+        }
+    </style>
+    <script>
+        function validateNumber() {
+            
+            var input = document.getElementById("numInput").value.trim();
+            
+            if (input === '' || isNaN(input)) {
+                document.getElementById("validationMessage").innerHTML = "Please enter a valid number.";
+                document.getElementById("output").innerHTML = ""; // Clear any previous output
+            } else {
+
+                document.getElementById("validationMessage").innerHTML = "";
+                document.getElementById("output").innerHTML = "Valid Number: <span class='valid'>" + input + "</span>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Number Validation</h2>
+    <p>Enter a number:</p>
+    <input type="text" id="numInput">
+    <button onclick="validateNumber()">Validate Number</button>
+    <p id="validationMessage" class="error"></p>
+    <div id="output" class="output"></div>
+</body>
+</html>
+
+4.B.b. password
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name and Password Validation</title>
+    <style>
+        .error {
+            color: red;
+        }
+        .valid {
+            color: green;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("nameInput").value.trim();
+            var password = document.getElementById("passwordInput").value.trim();
+            var isValid = true;
+
+            if (name === '') {
+                document.getElementById("nameError").innerHTML = "Name cannot be empty.";
+                isValid = false;
+            } else {
+                document.getElementById("nameError").innerHTML = "";
+            }
+
+            if (password === '') {
+                document.getElementById("passwordError").innerHTML = "Password cannot be empty.";
+                isValid = false;
+            } else if (password.length < 6) {
+                document.getElementById("passwordError").innerHTML = "Password must be at least 6 characters long.";
+                isValid = false;
+            } else {
+                document.getElementById("passwordError").innerHTML = "";
+            }
+
+            if (isValid) {
+                document.getElementById("validationMessage").innerHTML = "<span class='valid'>Form is valid!</span>";
+            } else {
+                document.getElementById("validationMessage").innerHTML = "<span class='error'>Please fix the errors above.</span>";
+            }
+
+            return isValid;
+        }
+    </script>
+</head>
+<body>
+    <h2>Name and Password Validation</h2>
+    <form onsubmit="return validateForm()">
+        <p>
+            <label for="nameInput">Name:</label>
+            <input type="text" id="nameInput" name="nameInput">
+            <span id="nameError" class="error"></span>
+        </p>
+        <p>
+            <label for="passwordInput">Password:</label>
+            <input type="password" id="passwordInput" name="passwordInput">
+            <span id="passwordError" class="error"></span>
+        </p>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="validationMessage"></p>
+</body>
+</html>
+
+4.B.c.Retype password
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retype Password Validation</title>
+    <style>
+        .error {
+            color: red;
+        }
+        .valid {
+            color: green;
+        }
+    </style>
+    <script>
+        function validatePassword() {
+            var password1 = document.getElementById("passwordInput").value.trim();
+            var password2 = document.getElementById("passwordConfirmInput").value.trim();
+            if (password1 === password2) {
+                document.getElementById("passwordConfirmError").innerHTML = "";
+                return true;
+            } else {
+                document.getElementById("passwordConfirmError").innerHTML = "Passwords do not match.";
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Retype Password Validation</h2>
+    <form onsubmit="return validatePassword()">
+        <p>
+            <label for="passwordInput">Password:</label>
+            <input type="password" id="passwordInput" name="passwordInput">
+        </p>
+        <p>
+            <label for="passwordConfirmInput">Confirm Password:</label>
+            <input type="password" id="passwordConfirmInput" name="passwordConfirmInput">
+            <span id="passwordConfirmError" class="error"></span>
+        </p>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+4.B.d.Email validation
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validation</title>
+</head>
+<body>
+    <h2>Email Validation</h2>
+    <form id="emailForm">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+        <button type="button" onclick="validateEmail()">Validate</button>
+    </form>
+    <p id="result"></p>
+    <script>
+        function validateEmail() {
+            const emailInput = document.getElementById("email").value;
+            const result = document.getElementById("result");
+            const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (pattern.test(emailInput)) {
+                result.textContent = "Valid email address!";
+                result.style.color = "green";
+            } else {
+                result.textContent = "Invalid email address!";
+                result.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
+
+5(a) String
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>JavaScript Strings</h1>
+    <h2>The length Property</h2>
+    <p>The length property returns the length of a string.</p>
+    <p>Find the length of "Hello World!":</p>
+    <p id="demo"></p>
+    <script>
+        let text = "Hello World!";
+        let length = text.length;
+        document.getElementById("demo").innerHTML = length;
+    </script>
+</body>
+
+</html>
+
+2. Reg EXp
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>JavaScript Regular Expression</h1>
+    <h2>The /i Modifier</h2>
+    <p>A case-insensitive search for "hello" in a string:</p>
+    <p id="demo"></p>
+    <script>
+        let text = "hello world";
+        let pattern = /hello/i;
+        let result = text.match(pattern);
+        document.getElementById("demo").innerHTML = result;
+    </script>
+</body>
+
+</html>
+
+3.Math Obj
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>JavaScript Math.PI</h2>
+    <p>Math.PI returns the ratio of a circle's circumference to its diameter:</p>
+    <p id="demo"></p>
+    <script>
+        document.getElementById("demo").innerHTML = Math.PI;
+    </script>
+</body>
+
+</html>
+
+4.Date obj
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>JavaScript Dates</h1>
+    <h2>Using new Date()</h2>
+    <p>new Date() without arguments, creates a date object with the current date and time:</p>
+    <p id="demo"></p>
+    <script>
+        const d = new Date();
+        document.getElementById("demo").innerHTML = d;
+    </script>
+</body>
+
+</html>
+
+5(b) Window obj
+<html>
+
+<body>
+    <h1>The Window Object</h1>
+    <h2>The innerWidth and innerHeight Properties</h2>
+    <p id="demo"></p>
+    <script>
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+        document.getElementById("demo").innerHTML = "Width: " + w + "<br>Height: " + h;
+    </script>
+</body>
+
+</html>
+
+Navigator
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>The Window Navigator Object</h1>
+    <h2>All Properties</h2>
+    <div id="demo"></div>
+    <script>
+        let text = "<p>Browser CodeName: " + navigator.appCodeName + "</p>" +
+            "<p>Browser Name: " + navigator.appName + "</p>" +
+            "<p>Browser Version: " + navigator.appVersion + "</p>" +
+            "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>" +
+            "<p>Browser Language: " + navigator.language + "</p>" +
+            "<p>Browser Online: " + navigator.onLine + "</p>" +
+            "<p>Platform: " + navigator.platform + "</p>" +
+            "<p>User-agent header: " + navigator.userAgent + "</p>";
+        document.getElementById("demo").innerHTML = text;
+    </script>
+</body>
+
+</html>
+
+History
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>The Window History Object</h1>
+    <h2>The history.back() Method</h2>
+    <button onclick="history.back()">Go Back</button>
+    <p>Clicking "Go Back" will not result in any action, because there is no previous page in the
+        history list.</p>
+</body>
+
+</html>
+
+Location
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>The Window Location Object</h1>
+    <h2>The href Property</h2>
+    <p id="demo"></p>
+    <script>
+        let url = location.href;
+        document.getElementById("demo").innerHTML = url;
+    </script>
+</body>
+
+</html>
+
+5(c) storing and retrieving cookies
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        input,
+        button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cookie Example</h1>
+        <input type="text" id="username" placeholder="Enter your username">
+        <button onclick="setUserCookie()">Set Cookie</button>
+        <button onclick="getUserCookie()">Get Cookie</button>
+        <p id="message"></p>
+    </div>
+    <script>
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        function setUserCookie() {
+            const username = document.getElementById('username').value;
+            if (username) {
+                setCookie('username', username, 7);
+                document.getElementById('message').textContent = 'Cookie set for username: ' + username;
+            } else {
+                document.getElementById('message').textContent = 'Please enter a username.';
+            }
+        }
+        function getUserCookie() {
+            const username = getCookie('username');
+            if (username) {
+                document.getElementById('message').textContent = 'Hello, ' + username + '!';
+            } else {
+                document.getElementById('message').textContent = 'No cookie found. Please set the cookie first.';
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+6 create a xml file and create an external and internal DTD
+
+example.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE catalog SYSTEM "catalog.dtd">
+<catalog>
+<book id="type1">
+    <title>Introduction to XML</title>
+    <author>Jane Doe</author>
+    <price>29.95</price>
+    <publish_date>2024-08-01</publish_date>
+</book>
+    <book id="type2">
+        <title>Advanced XML</title>
+        <author>John Smith</author>
+        <price>39.95</price>
+        <publish_date>2024-07-15</publish_date>
+    </book>
+</catalog>
+
+catalog.dtd
+<!ELEMENT catalog (book+)>
+<!ELEMENT book (title, author, price, publish_date)>
+<!ATTLIST book id ID #REQUIRED>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ELEMENT publish_date (#PCDATA)>
+
+Transform.xsl
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" indent="yes" />
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Catalog</title>
+                <link rel="stylesheet" type="text/css" href="styles.css" />
+            </head>
+            <body>
+                <h1>Book Catalog</h1>
+                <xsl:apply-templates select="catalog/book" />
+            </body>
+        </html>
+    </xsl:template>
+
+    <xsl:template match="book">
+        <div class="book">
+            <h2>
+                <xsl:value-of select="title" />
+            </h2>
+            <p>
+                <strong>Author:</strong>
+                <xsl:value-of select="author" />
+            </p>
+            <p>
+                <strong>Price:</strong>
+                <xsl:value-of select="price" />
+            </p>
+            <p>
+                <strong>Publish Date:</strong>
+                <xsl:value-of select="publish_date" />
+            </p>
+        </div>
+    </xsl:template>
+</xsl:stylesheet>
+
+Styles.css
+body {
+font-family: Arial, sans-serif;
+margin: 20px;
+background-color: #f9f9f9;
+}
+h1 {
+text-align: center;
+color: #333;
+}
+.book {
+border: 1px solid #ddd;
+border-radius: 5px;
+padding: 15px;
+margin: 15px 0;
+background-color: #fff;
+}
+.book h2 {
+color: #007BFF;
+}
+.book p {
+margin: 5px 0;
+}
+
+Practical no 7.Design a web page to handle synchronous and asynchronous request using ajex on button
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content=
+        "width=device-width, initial-scale=1.0">
+    <title>AJAX Async Requests</title>
+
+    <style>
+        body {
+            text-align: center;
+        }
+
+        h1 {
+            padding: 2px;
+            color: green;
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        div {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>AJAX Asynchronous Requests</h2>
+    <div id="response"></div>
+    <button onclick="SendAsyncRequest()">Async Request</button>
+    <button onclick="SendSyncRequest()">Sync Request</button>
+
+    <script>
+        function SendAsyncRequest() {
+            document.getElementById('response').innerText = "";
+            var request = new XMLHttpRequest();
+            request.open('GET', 
+            'https://jsonplaceholder.typicode.com/todos/1', true);
+            request.onload = () => {
+                document.getElementById('response').innerText
+                    += "Response : \n" + request.responseText;
+            }
+            request.send();
+            document.getElementById('response').innerText
+                += "\n\n OTHER TASK EXECUTED\n\n";
+        }
+
+        function SendSyncRequest() {
+            document.getElementById('response').innerText = "";
+            var request = new XMLHttpRequest();
+            request.open('GET', 
+            'https://jsonplaceholder.typicode.com/todos/1', false);
+            request.onload = () => {
+                document.getElementById('response').innerText
+                    += "Response : \n" + request.responseText;
+            }
+            request.send();
+            document.getElementById('response').innerText
+                += "\n\n OTHER TASK EXECUTED\n\n";
+        }
+    </script>
+</body>
+
+</html>
+
+Practical 8.Design a web page with same jquery animation effect.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Animation Example</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: #007bff;
+            color: white;
+            line-height: 200px;
+            text-align: center;
+            margin: 20px auto;
+            display: none; 
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="fadeInBtn">Fade In</button>
+        <button id="fadeOutBtn">Fade Out</button>
+        <button id="slideUpBtn">Slide Up</button>
+        <button id="slideDownBtn">Slide Down</button>
+        <button id="toggleBtn">Toggle</button>
+
+        <div id="box">Animate Me!</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#fadeInBtn').click(function() {
+                $('#box').fadeIn('slow'); 
+            });
+            $('#fadeOutBtn').click(function() {
+                $('#box').fadeOut('slow'); 
+            });
+            $('#slideUpBtn').click(function() {
+                $('#box').slideUp('slow'); 
+            });
+            $('#slideDownBtn').click(function() {
+                $('#box').slideDown('slow'); 
+            });
+            $('#toggleBtn').click(function() {
+                $('#box').toggle('slow'); 
+            });
+        });
+    </script>
+</body>
+</html>
+
+9.a.Write PHP scripts for retrieving data
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieve Data from HTML Form</title>
+</head>
+<body>
+    <font size="5">
+        <form method="POST" action="process.php">
+            Enter First Name: <input type="text" name="first_name"> <br><br>
+            Enter Background Color: <input type="text" name="bg_color"> <br><br>
+            Enter String: <input type="text" name="user_string"> <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </font>
+</body>
+</html>
+
+<?php
+$firstName = $_POST["first_name"];
+$bgColor = $_POST["bg_color"];
+$userString = $_POST["user_string"];
+echo "<body style='background-color: $bgColor;'>";
+echo "<h2>Hello, $firstName!</h2>";
+echo "<p>You entered the string: <strong>$userString</strong></p>";
+echo "</body>";
+?>
+
+B.Find fibonacci series.
+
+<?php
+function factorial($n) {
+    if ($n == 0) {
+        return 1;
+    }
+    return $n * factorial($n - 1);
+}
+
+function fibonacci($n) {
+    $fib = [0, 1];
+    for ($i = 2; $i < $n; $i++) {
+        $fib[] = $fib[$i - 1] + $fib[$i - 2];
+    }
+    return $fib;
+}
+
+$number = 5;
+echo "Factorial of $number is: " . factorial($number) . "\n";
+
+$length = 10;
+echo "Fibonacci series of $length terms: ";
+print_r(fibonacci($length));
+?>
